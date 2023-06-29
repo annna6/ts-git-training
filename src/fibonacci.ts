@@ -1,9 +1,9 @@
 export const computeFibonacciNumber = (position: number, isRecursive: boolean = false): number => {
     if (isRecursive) return recursiveFibonacci(position);
-
-    let i: number = 1;
-    let j: number = 1;
-
+    if (position == 1 || position == 2) {
+      return 1;
+    }
+  
     let notNullPosition : number = position;
     if (notNullPosition === null) {
         notNullPosition = 1;
@@ -17,14 +17,17 @@ export const computeFibonacciNumber = (position: number, isRecursive: boolean = 
         return 1;
     }
 
+    let smallFibonacciNumber = 1;
+    let largeFibonacciNumber = 1;
+
     let currentPosition = 2;
-    while (currentPosition < notNullPosition) {
-        const temp = i;
-        i = j;
-        j += temp;
+    while (currentPosition < position) {
+        const nextFibonacciNumber = smallFibonacciNumber + largeFibonacciNumber;
+        smallFibonacciNumber = largeFibonacciNumber;
+        largeFibonacciNumber = nextFibonacciNumber;
         currentPosition++;
     }
-    return j;
+    return largeFibonacciNumber;
 };
 
 const computeNegativeFibonacci = (position: number): number => {
